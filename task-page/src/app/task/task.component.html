@@ -3,6 +3,8 @@
 <ul class="list-group">tasks list
     <li *ngFor ="let task of tasks" class="list-group-item">
       <h3> {{task.title}} </h3>
+
+      <hr>
       <h4 *ngIf="task.completed" style = "color: green"> completed</h4>
       <h4 *ngIf="task.completed === false" style = "color:red">not completed </h4>
     </li>

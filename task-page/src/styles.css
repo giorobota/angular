@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+.list-group-item{
+    background-color: rgb(94, 156, 177);
+    color: white;
+    float: left;
+}
+.list-group{
+    background-color:black;
+    color: white;
+    font-size: 200%;
+}
