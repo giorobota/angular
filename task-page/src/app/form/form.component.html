@@ -1,3 +1,12 @@
-<p>
-  form works!
-</p>
+<ul class="list-group"> list of posts
+  <li *ngFor ="let post of posts" class="list-group-item list-group-item-success">
+        {{post.title}}
+        <hr>
+        
+        {{post.body}}
+    <a [routerLink]="['/post', post.id]" routerLinkActive="active">
+      Edit post
+    </a>
+  </li>
+  
+</ul>
