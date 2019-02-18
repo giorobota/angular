@@ -1,0 +1,12 @@
+.list-group-item{
+    background-color: rgb(94, 156, 177);
+    color: white;
+}
+.list-group{
+    background-color:black;
+    color: white;
+    font-size: 200%;
+}
+a{
+    color: black;
+}

@@ -1,8 +1,8 @@
 
 
 
-<h1>list of users</h1>
-<ul class="list-group">
+
+<ul class="list-group"> list of users
     <li *ngFor ="let user of users" class="list-group-item list-group-item-success">
           {{user.name}}, {{user.email}}
       <a [routerLink]="['/tasks', user.id]" routerLinkActive="active">
