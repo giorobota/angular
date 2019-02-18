@@ -7,13 +7,15 @@ import { UserComponent } from './user/user.component';
 import { TaskComponent } from './task/task.component';
 import { HttpClientModule } from '@angular/common/http'; 
 import { RouterModule, Routes } from '@angular/router';
+import { FormComponent } from './form/form.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
-    TaskComponent
+    TaskComponent,
+    FormComponent
     
   ],
   imports: [
