@@ -26,9 +26,9 @@ export class TaskComponent implements OnInit {
   }
   
   getTasks(userId: number){
-    this.http.get(this.tasksUrl).subscribe((result: task[])=>{
+    this.http.get(this.tasksUrl + "?userId="+userId).subscribe((result: task[])=>{
     
-      this.tasks = result.filter(((x: { userId: number; }) => x.userId == userId));//????
+      this.tasks = result;
       console.log(result);
 
       
