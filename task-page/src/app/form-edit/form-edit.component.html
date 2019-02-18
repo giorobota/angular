@@ -1,0 +1,31 @@
+<div class="container">
+  <h2>Edit post</h2>
+  <form>
+    <div class="form-group">
+      <input class="form-control" id = "title"
+      [(ngModel)]="post.title" name="title">
+    </div>
+    <div >
+      <input class="form-control" id="body"  
+      [(ngModel)]="post.body" name="body">
+    </div>
+
+    <button class="btn btn-success" (click) = applyChanges()>apply changes</button>
+    <button class="btn btn-danger" (click) = deletePost() 
+      style = "float:right">
+      delete post
+    </button>
+  </form>
+  <!-- <ngb-alert *ngIf="updateScuccessMessage" type="success" 
+  (close)="updateScuccessMessage = false">
+    the post was succesfully updated
+  </ngb-alert>
+  <ngb-alert *ngIf="deleteScuccessMessage" type="success" 
+  (close)="deleteScuccessMessage = false">
+    the post was succesfully deleted
+  </ngb-alert>
+  <ngb-alert *ngIf="wrongUrlMessage" type="danger" 
+  (close)="wrongUrlMessage = false">
+    post id should only contain numbers!
+  </ngb-alert> -->
+</div>

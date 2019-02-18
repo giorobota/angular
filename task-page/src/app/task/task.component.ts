@@ -19,9 +19,15 @@ export class TaskComponent implements OnInit {
   
   ngOnInit() {
     this.route.params.subscribe(params => {
-      
+      var val = params['id'];
+      var isnum = /^\d+$/.test(val);
+      if(isnum){
+        this.getTasks(val);
+      }else{
+        //alert wrong url
+      }
      
-      this.getTasks(params['id']);
+      
     });
     
   }
