@@ -1,7 +1,7 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { task } from './task-interface';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, } from '@angular/router';
 
 
 @Component({
@@ -19,7 +19,8 @@ export class TaskComponent implements OnInit {
   
   ngOnInit() {
     this.route.params.subscribe(params => {
-       //????
+      
+     
       this.getTasks(params['id']);
     });
     
