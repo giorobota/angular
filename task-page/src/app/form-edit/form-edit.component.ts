@@ -17,16 +17,16 @@ export class FormEditComponent implements OnInit {
   constructor(private http: HttpClient, private route: ActivatedRoute,
     private router: Router) { }
   
-  deleteScuccessMessage = false;
-  updateSuccessMessage = false;
-  wrongUrlMessage = false;
+
   postsUrl = "https://jsonplaceholder.typicode.com/posts";
+  usersUrl = "https://jsonplaceholder.typicode.com/users";
   post: form =  {
     "userId": 0,
     "id": 0,
     "title": "",
     "body": ""
   };
+  postingUser: string = "";
 
 
  
@@ -34,11 +34,14 @@ export class FormEditComponent implements OnInit {
     this.route.params.subscribe(params => {
       var val = params['id'];
       var isnum = /^\d+$/.test(val);
+      
       if(isnum){
-        this.getPost(val);
+ 
+          if(val !=0)this.getPost(val);
+        
       }else{
         //alert wrong url
-        this.wrongUrlMessage = true;
+        this.router.navigate(['/posts',"wrongUrl"]);
       }
       
     });
@@ -52,6 +55,7 @@ export class FormEditComponent implements OnInit {
       console.log(result);
     });
   }
+  
   applyChanges(){
     fetch(this.postsUrl + "/" + this.post.id, {
       method: 'PUT',
@@ -68,7 +72,8 @@ export class FormEditComponent implements OnInit {
     .then(response => response.json())
     .then(json => console.log(json));
     //alert update
-    this.updateSuccessMessage = true;
+    
+    this.router.navigate(['/posts',"update"]);
   }
   deletePost(){
     fetch(this.postsUrl + "/" + this.post.id, {
@@ -76,10 +81,45 @@ export class FormEditComponent implements OnInit {
     });
     console.log("post deleted");
     //alert delete
-    this.deleteScuccessMessage = true;
+    
+    this.router.navigate(['/posts', "delete"]);
   }
 
-  
-  
+  createPost(){
+    
+    this.getUserId();
+    if(this.post.userId==0){
+      //alert wrong username
+      this.router.navigate(['/posts', 'wrongUser']);
+    }else{
+      fetch(this.postsUrl, {
+        method: 'POST',
+        body: JSON.stringify({
+          title: this.post.title,
+          body: this.post.body,
+          userId:  this.post.userId
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
+        }
+      })
+      .then(response => response.json())
+      .then(json => console.log(json))
+      //alert create
+      this.router.navigate(['/posts', 'create']);
+    }
+    
+  }
+
+  getUserId() {
+    this.http.get(this.usersUrl + "?username="+ this.postingUser).subscribe((result: form[])=>{
+      
+      if(result.length > 0){
+        this.post.userId = result[0].id;
+      }
+      
+      console.log(result);
+    });
+  }
 
 }

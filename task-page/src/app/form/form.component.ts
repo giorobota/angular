@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { form } from './form-interface';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -11,12 +12,15 @@ import { form } from './form-interface';
 })
 export class FormComponent implements OnInit {
   postsUrl = "https://jsonplaceholder.typicode.com/posts";
-  
+  message: string = "";
   posts: form[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,  private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.message = params['status'];
+    });
     this.getPosts();
   }
   getPosts(){

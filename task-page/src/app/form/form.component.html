@@ -1,11 +1,32 @@
-<ul class="list-group"> list of posts
+<div *ngIf = "message == 'delete'"class="alert alert-success alert-dismissible fade show" role="alert">
+    post was succesfully deleted
+</div>
+<div *ngIf = "message == 'update'"class="alert alert-success alert-dismissible fade show" role="alert">
+    post was succesfully updated
+</div>
+<div *ngIf = "message == 'create'"class="alert alert-success alert-dismissible fade show" role="alert">
+    post was succesfully created
+</div>
+<div *ngIf = "message == 'wrongUser'"class="alert alert-danger alert-dismissible fade show" role="alert">
+    you entered incorrect username
+</div>
+<div *ngIf = "message == 'wrongUrl'"class="alert alert-danger alert-dismissible fade show" role="alert">
+    you entered incorrect URL
+</div>
+<ul class="list-group"> 
+  <h1>list of posts</h1>
+  <button style = "color:green"[routerLink]="['/post', '0']" routerLinkActive="active">
+    create a new post
+  </button>
   <li *ngFor ="let post of posts" class="list-group-item list-group-item-success">
-        <h2>{{post.title}}</h2>
+        <strong>{{post.title}}</strong>
         <hr>
         {{post.body}}
-    <a [routerLink]="['/post', post.id]" routerLinkActive="active">
+    <a style="float: right"[routerLink]="['/post', post.id]" routerLinkActive="active">
       Edit post
     </a>
   </li>
+
+
   
 </ul>
