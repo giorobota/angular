@@ -1,5 +1,6 @@
 <div class="container">
-  <h2 style="text-align: center">Edit post</h2>
+  <h1 *ngIf = "post.id != 0" style="text-align: center">Edit post</h1>
+  <h1 *ngIf = "post.id == 0" style="text-align: center">Create post</h1>
   <form>
     <div class="form-group">
       <h3>title </h3>
@@ -19,7 +20,7 @@
         <input class="form-control" id="name"  
         [(ngModel)]="postingUser" name="postingUser">
     </div>
-  
+    
 
     <button *ngIf = "post.id != 0" class="btn btn-success" (click) = applyChanges()>apply changes</button>
     <button *ngIf = "post.id != 0" class="btn btn-danger" (click) = deletePost() 
