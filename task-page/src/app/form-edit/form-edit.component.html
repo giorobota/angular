@@ -10,8 +10,8 @@
     <div class="form-group">
       <h3>content</h3>
       <hr>
-      <input class="form-control" id="body"  
-      [(ngModel)]="post.body" name="body">
+      <textarea rows="10"  id="body"  
+      [(ngModel)]="post.body" name="body"></textarea>
     </div>
     <div *ngIf="post.id == 0" class="form-group">
         <h3>post as:</h3>
@@ -19,6 +19,7 @@
         <input class="form-control" id="name"  
         [(ngModel)]="postingUser" name="postingUser">
     </div>
+  
 
     <button *ngIf = "post.id != 0" class="btn btn-success" (click) = applyChanges()>apply changes</button>
     <button *ngIf = "post.id != 0" class="btn btn-danger" (click) = deletePost() 

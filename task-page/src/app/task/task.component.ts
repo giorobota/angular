@@ -11,7 +11,7 @@ import { ActivatedRoute, } from '@angular/router';
 })
 @Injectable()
 export class TaskComponent implements OnInit {
-  [x: string]: any;
+  
   tasksUrl = "https://jsonplaceholder.typicode.com/todos";
   tasks: task[] = [];
   
