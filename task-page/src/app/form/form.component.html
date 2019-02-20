@@ -4,7 +4,7 @@
   <button style = "color:green"[routerLink]="['/post', '0']" routerLinkActive="active">
     create a new post
   </button>
-  <li *ngFor ="let post of posts" class="list-group-item list-group-item-success">
+  <li *ngFor ="let post of posts.list" class="list-group-item list-group-item-success">
         <strong>{{post.title}}</strong>
         <hr>
         {{post.body}}

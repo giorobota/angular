@@ -2,7 +2,7 @@ import { Component, OnInit, Injectable, Output, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { ActivatedRoute, Router} from '@angular/router';
-import { form } from '../form/form-interface';
+import { post } from '../form/post';
 import { environment } from 'src/environments/environment';
 import { alert } from './alert';
 
@@ -22,7 +22,7 @@ export class FormEditComponent implements OnInit {
   
 
   
-  post: form =  {
+  post: post =  {
     "userId": 0,
     "id": 0,
     "title": "",
@@ -53,7 +53,7 @@ export class FormEditComponent implements OnInit {
   }
   getPost(id: number){
     
-    this.http.get(environment.postsUrl + "?id="+id).subscribe((result: form[])=>{
+    this.http.get(environment.postsUrl + "?id="+id).subscribe((result: post[])=>{
     
       this.post = result[0];
       console.log(result);
@@ -112,7 +112,7 @@ export class FormEditComponent implements OnInit {
   }
 
   getUserId() {
-    this.http.get(environment.usersUrl + "?username="+ this.postingUser).subscribe((result: form[])=>{
+    this.http.get(environment.usersUrl + "?username="+ this.postingUser).subscribe((result: post[])=>{
       
       if(result.length > 0){
         this.post.userId = result[0].id;

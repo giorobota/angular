@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Injectable } from '@angular/core';
+
 import { HttpClient } from '@angular/common/http';
-import { form } from './form-interface';
+
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import { posts } from './posts';
 
 @Component({
   selector: 'app-form',
@@ -11,19 +13,14 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
-  postsUrl = "https://jsonplaceholder.typicode.com/posts";
-  message: string = "";
-  posts: form[] = [];
+  
+  
+  posts: posts;
 
   constructor(private http: HttpClient,  private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.getPosts();
+    this.posts= new posts(this.http, environment.postsUrl);
   }
-  getPosts(){
-    this.http.get(this.postsUrl).subscribe((result: form[])=>{
-      this.posts = result;
-      console.log(result);
-    });
-  }
+  
 }
