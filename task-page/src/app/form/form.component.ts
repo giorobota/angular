@@ -18,9 +18,6 @@ export class FormComponent implements OnInit {
   constructor(private http: HttpClient,  private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.message = params['status'];
-    });
     this.getPosts();
   }
   getPosts(){

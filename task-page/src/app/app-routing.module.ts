@@ -9,11 +9,11 @@ const routes: Routes = [
   { path: 'users', component: UserComponent },
   { path: 'tasks/:id', component: TaskComponent },
   { path: '',
-    redirectTo: '/posts/none',
+    redirectTo: '/posts',
     pathMatch: 'full'
   },
   {
-    path: 'posts/:status', 
+    path: 'posts', 
     component: FormComponent,
   },
   {

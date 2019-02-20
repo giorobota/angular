@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 
 import { ActivatedRoute, Router} from '@angular/router';
 import { form } from '../form/form-interface';
+import { environment } from 'src/environments/environment';
+import { alert } from './alert';
+
 
 
 
@@ -18,19 +21,21 @@ export class FormEditComponent implements OnInit {
     private router: Router) { }
   
 
-  postsUrl = "https://jsonplaceholder.typicode.com/posts";
-  usersUrl = "https://jsonplaceholder.typicode.com/users";
+  
   post: form =  {
     "userId": 0,
     "id": 0,
     "title": "",
     "body": ""
   };
+
   postingUser: string = "";
-
-
+  
+  alert: alert;
  
   ngOnInit() {
+    this.alert = new alert();
+    
     this.route.params.subscribe(params => {
       var val = params['id'];
       var isnum = /^\d+$/.test(val);
@@ -40,8 +45,7 @@ export class FormEditComponent implements OnInit {
           if(val !=0)this.getPost(val);
         
       }else{
-        //alert wrong url
-        this.router.navigate(['/posts',"wrongUrl"]);
+          this.alert.setAlert("incorrect url", "alert-warning");
       }
       
     });
@@ -49,7 +53,7 @@ export class FormEditComponent implements OnInit {
   }
   getPost(id: number){
     
-    this.http.get(this.postsUrl + "?id="+id).subscribe((result: form[])=>{
+    this.http.get(environment.postsUrl + "?id="+id).subscribe((result: form[])=>{
     
       this.post = result[0];
       console.log(result);
@@ -57,14 +61,9 @@ export class FormEditComponent implements OnInit {
   }
   
   applyChanges(){
-    fetch(this.postsUrl + "/" + this.post.id, {
+    fetch(environment.postsUrl + "/" + this.post.id, {
       method: 'PUT',
-      body: JSON.stringify({
-        id: this.post.id,
-        title: this.post.title,
-        body: this.post.body,
-        userId: this.post.userId
-      }),
+      body: JSON.stringify(this.post),
       headers: {
         "Content-type": "application/json; charset=UTF-8"
       }
@@ -73,16 +72,16 @@ export class FormEditComponent implements OnInit {
     .then(json => console.log(json));
     //alert update
     
-    this.router.navigate(['/posts',"update"]);
+    this.alert.setAlert("successfully updated", "alert-success");
   }
   deletePost(){
-    fetch(this.postsUrl + "/" + this.post.id, {
+    fetch(environment.postsUrl + "/" + this.post.id, {
       method: 'DELETE'
     });
     console.log("post deleted");
     //alert delete
     
-    this.router.navigate(['/posts', "delete"]);
+    this.alert.setAlert("successfully deleted", "alert-success");
   }
 
   createPost(){
@@ -90,9 +89,9 @@ export class FormEditComponent implements OnInit {
     this.getUserId();
     if(this.post.userId==0){
       //alert wrong username
-      this.router.navigate(['/posts', 'wrongUser']);
+      this.alert.setAlert("incorrect username", "alert-warning");
     }else{
-      fetch(this.postsUrl, {
+      fetch(environment.postsUrl, {
         method: 'POST',
         body: JSON.stringify({
           title: this.post.title,
@@ -106,13 +105,14 @@ export class FormEditComponent implements OnInit {
       .then(response => response.json())
       .then(json => console.log(json))
       //alert create
-      this.router.navigate(['/posts', 'create']);
+      
+      this.alert.setAlert("successfully created", "alert-success");
     }
     
   }
 
   getUserId() {
-    this.http.get(this.usersUrl + "?username="+ this.postingUser).subscribe((result: form[])=>{
+    this.http.get(environment.usersUrl + "?username="+ this.postingUser).subscribe((result: form[])=>{
       
       if(result.length > 0){
         this.post.userId = result[0].id;

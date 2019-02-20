@@ -1,6 +1,12 @@
+
 <div class="container">
+  <div *ngIf = "alert.status" class=alert-warning role="alert">
+      {{alert.message}}
+  </div>
+  <button class="btn btn-primary" [routerLink]="['/posts']">← go back</button>
   <h1 *ngIf = "post.id != 0" style="text-align: center">Edit post</h1>
   <h1 *ngIf = "post.id == 0" style="text-align: center">Create post</h1>
+
   <form>
     <div class="form-group">
       <h3>title </h3>
@@ -28,5 +34,7 @@
       delete post
     </button>
     <button *ngIf = "post.id == 0" class="btn btn-success" (click) = createPost()>create post</button>
+    
+
   </form>
 </div>
