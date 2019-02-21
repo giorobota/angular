@@ -78,6 +78,7 @@ export class FormEditComponent implements OnInit {
     fetch(environment.postsUrl + "/" + this.post.id, {
       method: 'DELETE'
     });
+    console.log(this.post);
     console.log("post deleted");
     //alert delete
     
