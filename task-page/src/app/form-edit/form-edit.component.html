@@ -1,4 +1,4 @@
-<div *ngIf = "alert.status" class=alert-warning role="alert">
+<div *ngIf = "alert.status" class="{{alert.class}}" role="alert">
   {{alert.message}}
   <button class="alert-warinig" (click) = 'alert.close()'>close</button>
 </div>
