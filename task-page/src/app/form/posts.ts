@@ -1,11 +1,12 @@
 import { post } from './post';
 import { HttpClient } from '@angular/common/http';
 
+
 export class posts{
     "list": post[];
     
-    
-    constructor(private http: HttpClient, url:string){
+  
+   constructor(private http: HttpClient, url:string){
         this.getPosts(url);
     }
     getPosts(url:string){

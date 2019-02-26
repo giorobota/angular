@@ -5,6 +5,7 @@ import { ActivatedRoute, Router} from '@angular/router';
 import { post } from '../form/post';
 import { environment } from 'src/environments/environment';
 import { alert } from './alert';
+import { postedit } from './postedit';
 
 
 
@@ -20,7 +21,7 @@ export class FormEditComponent implements OnInit {
   constructor(private http: HttpClient, private route: ActivatedRoute,
     private router: Router) { }
   
-
+  postServices:postedit;
   
   post: post =  {
     "userId": 0,
@@ -35,7 +36,7 @@ export class FormEditComponent implements OnInit {
  
   ngOnInit() {
     this.alert = new alert();
-    
+    this.postServices = new postedit(this.http, this.route, this.router);
     this.route.params.subscribe(params => {
       var val = params['id'];
       var isnum = /^\d+$/.test(val);

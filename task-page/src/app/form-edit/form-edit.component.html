@@ -28,13 +28,12 @@
         [(ngModel)]="postingUser" name="postingUser">
     </div>
     
-
-    <button *ngIf = "post.id != 0" class="btn btn-success" (click) = applyChanges()>apply changes</button>
-    <button *ngIf = "post.id != 0" class="btn btn-danger" (click) = deletePost() 
+    <button *ngIf = "post.id != 0" class="btn btn-success" (click) = postServices.applyChanges(post,alert)>apply changes</button>
+    <button *ngIf = "post.id != 0" class="btn btn-danger" (click) = postServices.deletePost(post,alert) 
       style = "float:right">
       delete post
     </button>
-    <button *ngIf = "post.id == 0" class="btn btn-success" (click) = createPost()>create post</button>
+    <button *ngIf = "post.id == 0" class="btn btn-success" (click) = postServices.createPost(post,postingUser,alert)>create post</button>
     
 
   </form>
