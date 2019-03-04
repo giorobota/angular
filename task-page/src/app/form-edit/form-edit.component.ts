@@ -61,67 +61,6 @@ export class FormEditComponent implements OnInit {
     });
   }
   
-  applyChanges(){
-    fetch(environment.postsUrl + "/" + this.post.id, {
-      method: 'PUT',
-      body: JSON.stringify(this.post),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
-    })
-    .then(response => response.json())
-    .then(json => console.log(json));
-    //alert update
-    
-    this.alert.setAlert("successfully updated", "alert-success");
-  }
-  deletePost(){
-    fetch(environment.postsUrl + "/" + this.post.id, {
-      method: 'DELETE'
-    });
-    console.log(this.post);
-    console.log("post deleted");
-    //alert delete
-    
-    this.alert.setAlert("successfully deleted", "alert-success");
-  }
-
-  createPost(){
-    
-    this.getUserId();
-    if(this.post.userId==0){
-      //alert wrong username
-      this.alert.setAlert("incorrect username", "alert-warning");
-    }else{
-      fetch(environment.postsUrl, {
-        method: 'POST',
-        body: JSON.stringify({
-          title: this.post.title,
-          body: this.post.body,
-          userId:  this.post.userId
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8"
-        }
-      })
-      .then(response => response.json())
-      .then(json => console.log(json))
-      //alert create
-      
-      this.alert.setAlert("successfully created", "alert-success");
-    }
-    
-  }
-
-  getUserId() {
-    this.http.get(environment.usersUrl + "?username="+ this.postingUser).subscribe((result: post[])=>{
-      
-      if(result.length > 0){
-        this.post.userId = result[0].id;
-      }
-      
-      console.log(result);
-    });
-  }
+  
 
 }

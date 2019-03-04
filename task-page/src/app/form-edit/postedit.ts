@@ -12,13 +12,7 @@ export class postedit {
     constructor(private http: HttpClient, private route: ActivatedRoute,
         private router: Router){}
     
-    getPost(id: number):post{
-        this.http.get(environment.postsUrl + "?id="+id).subscribe((result: post[])=>{
-            console.log(result);
-            return result[0];
-          });
-        return null;
-    }
+
     applyChanges(post: post, alert: alert){
         fetch(environment.postsUrl + "/" + post.id, {
           method: 'PUT',
